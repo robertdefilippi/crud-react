@@ -8,12 +8,18 @@ class App extends Component {
 
     componentDidMount() {
         fetch('/foo')
-            .then(res => {
-                console.log(res);
-                return res.json();
-                // .then(express => this.setState({ express }))
-                // .then(() => console.log(this.state.message));
+            .then(res => res.json())
+            .then(data => {
+                console.log(data[0].text);
+                this.setState({
+                    message: data[0].text
+                })
             });
+
+
+
+        // .then(express => this.setState({ express }))
+                // .then(() => console.log(this.state.message));
     }
 
     render() {
