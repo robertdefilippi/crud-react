@@ -2,9 +2,14 @@ import React, {Component} from 'react';
 import './App.css';
 
 class App extends Component {
-    state = {
-        message: ""
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            message: "",
+            usernames: []
+        };
+    }
+
 
     componentDidMount() {
         fetch('/foo')
@@ -16,10 +21,20 @@ class App extends Component {
                 })
             });
 
-
-
-        // .then(express => this.setState({ express }))
-                // .then(() => console.log(this.state.message));
+        fetch('/users')
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(users => {
+                    let newArray = this.state.usernames.slice();
+                    newArray.push(users);
+                    this.setState({
+                        usernames: newArray
+                    })
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     render() {
@@ -27,6 +42,10 @@ class App extends Component {
             <div className="App">
                 <h1>Users</h1>
                 <p>The current state is {this.state.message}</p>
+                {/*<p>{this.state.usernames}</p>*/}
+                {this.state.usernames.map(user =>
+                <div key={user.id}>{user.username}</div>
+                )}
             </div>
         );
     }
