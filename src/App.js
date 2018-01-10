@@ -6,7 +6,9 @@ class App extends Component {
         super(props);
         this.state = {
             message: "",
-            usernames: []
+            usernames: [],
+            express: ""
+
         };
     }
 
@@ -15,7 +17,6 @@ class App extends Component {
         fetch('/foo')
             .then(res => res.json())
             .then(data => {
-                console.log(data[0].text);
                 this.setState({
                     message: data[0].text
                 })
@@ -35,6 +36,15 @@ class App extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+
+        fetch('/api/hello')
+            .then(data => data.json())
+            .then(result => {
+                this.setState({
+                    message: result.express
+                });
+            });
+
     }
 
     render() {
@@ -42,10 +52,10 @@ class App extends Component {
             <div className="App">
                 <h1>Users</h1>
                 <p>The current state is {this.state.message}</p>
-                {/*<p>{this.state.usernames}</p>*/}
                 {this.state.usernames.map(user =>
                 <div key={user.id}>{user.username}</div>
                 )}
+                <p>{this.state.message}</p>
             </div>
         );
     }
