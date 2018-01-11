@@ -13,4 +13,12 @@ app.get('/api/hello', (req, res) => {
     res.send({ express: 'Hello From Express' });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// Catch 404
+app.use((req, res, next) => {
+    res.status(404).send('<h2 align=center>Page Not Found!</h2>');
+});
+
+// Set listening console message
+app.listen(port, () =>
+    console.log(`Listening on port ${port}`)
+);
