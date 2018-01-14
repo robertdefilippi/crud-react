@@ -1,9 +1,10 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 // Import the models created in ../models/model
-import Recipe from '../models/model';
+let Recipe = require('../models/model');
+// import Recipe from '../models/model';
 
-// Request functions for different recipes
+// Request f    unctions for different recipes
 // TODO connect to database rather than having the data local
 
 // GET/READ Recipe Request
@@ -19,7 +20,8 @@ export const getRequest = (req, res) => {
         // If no error, return message
         return res.json({
             'success': true,
-            'message': 'Object got successfully: ' + recipe
+            'message': 'Object GET success',
+            recipe
         });
     });
 };
@@ -36,7 +38,8 @@ export const postRequest = (req, res) => {
         }
         return res.json({
             'success': true,
-            'message': 'Todo added successfully: ' + recipe
+            'message': 'Recipe added successfully',
+            recipe
         });
     })
 };
@@ -89,7 +92,8 @@ export const getRequestByID = (req, res) => {
         if (recipe.length) {
             return res.json({
                 'success': true,
-                'message': 'Recipe fetched by id successfully', recipe
+                'message': 'Recipe fetched by id successfully',
+                recipe
             });
         }
         else {

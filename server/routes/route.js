@@ -1,11 +1,12 @@
 import express from 'express';
 
-//import controller file from controller folder
+// Import Controller object from controller folder
 import * as RecipeController from '../controllers/controller';
 
 // Create router object
 const router = express.Router();
 
+// Set routes
 router.route('/')
     .get(RecipeController.getRequest)
     .post(RecipeController.postRequest)

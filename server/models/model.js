@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+let mongoose = require('mongoose');
 
-let Schema = mongoose.Schema({
+let recipeSchema = new mongoose.Schema({
 
     id:{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
 
@@ -42,4 +42,5 @@ let Schema = mongoose.Schema({
 
 });
 
-export default mongoose.model('Recipe', Schema);
+// Export recipeSchema model
+module.exports = mongoose.model('Recipe', recipeSchema);

@@ -10,7 +10,10 @@ import SourceMapSupport from 'source-map-support';
 // Import routes
 // const users = require('./routes/users');
 // const foo = require('./routes/foo');
-import recipes from './routes/route'
+import recipeRoutes from './routes/route'
+
+// Import recipe model
+let recipeModel = require('./models/model');
 
 // Define express app and port
 const app = express();
@@ -35,28 +38,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connect to database
-// TODO connect to external database
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/recipies', {
-    useMongoClient: true,
+// Connect to external Mongo DB hosted on Mlab
+// Created user for the db
+let mongoDB = 'mongodb://admin:password@ds255767.mlab.com:55767/recipes-db';
+mongoose.connect(mongoDB, {
+    useMongoClient: true
 });
 
-// add Source Map Support
+mongoose.Promise = global.Promise;
+
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// Add Source Map Support to support for stack tracing.
+// Makes it easier to find errors
 SourceMapSupport.install();
 
-// Test routes
-app.get('/', (req, res) => {
+// Set routes for recipe .. use recipeRoutes at /api
+app.use('/api', recipeRoutes);
+
+// Route for testing purposes
+app.get('/test', (req, res) => {
     return res.end('Api working');
-})
-// app.use('/users', users);
-// app.use('/foo', foo);
+});
 
-// app.get('/api/hello', (req, res) => {
-//     res.send({ express: 'Hello From Express' });
-// });
-
-// Catch 404
+// Catch 404 errors
+// TODO is the next parameter necessary?
 app.use((req, res, next) => {
     res.status(404).send('<h2 align=center>Page Not Found!</h2>');
 });
