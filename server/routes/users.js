@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    res.send('POST handler for /dogs route.');
+    res.send('POST handler for /users route.');
 });
 
 module.exports = router;

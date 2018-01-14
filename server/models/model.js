@@ -13,25 +13,33 @@ let Schema = mongoose.Schema({
         required: true
     },
 
-    firstName: {
+    recipeName: {
         type: String,
         required: true
     },
 
-    lastName: {
+    chefName: {
         type: String,
         required: true
     },
 
-    profession: {
+    sourceOfWebsite: {
         type: String,
         required: true
     },
 
-    age:{
+    linkToRecipe:{
+        type: String,
+        required: true
+    },
+
+    raitingOfRecipe: {
         type: Number,
-        required: true
+        required: true,
+        min: 1,
+        max: 5
     }
+
 });
 
-export default mongoose.model('Chef', Schema);
+export default mongoose.model('Recipe', Schema);
