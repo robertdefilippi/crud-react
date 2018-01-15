@@ -1,24 +1,30 @@
-// ./react-redux-client/src/components/App.js
-import React from 'react';
-import { Navbar,Nav,NavItem,MenuItem } from 'react-bootstrap';
+// The main component of the CRUD app
+
+import React, {Component} from 'react';
+import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './App.css';
-export default class App extends React.Component {
+
+export default class App extends Component {
     constructor(props){
         super(props);
-        this.toggleAddTodo = this.toggleAddTodo.bind(this);
+        this.toggleAddRecipe = this.toggleAddRecipe.bind(this);
     }
-    toggleAddTodo(e){
+
+    // Define method to add recipe
+    toggleAddRecipe(e){
+        // Prevent default when there are no recipes
         e.preventDefault();
-        this.props.mappedToggleAddTodo();
+        this.props.mappedToggleAddRecipe();
     }
+
     render(){
         return(
             <div>
-                <Navbar inverse  collapseOnSelect className="customNav">
+                <Navbar inverse collapseOnSelect className="customNav">
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="/#">Mern Stack Todo App</a>
+                            <a href="/#">CRUD Recipe App</a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
@@ -29,14 +35,13 @@ export default class App extends React.Component {
                             </LinkContainer>
                         </Nav>
                         <Nav pullRight>
-                            <LinkContainer to={{ pathname: '/', query: {  } }} onClick={this.toggleAddTodo}>
-                                <NavItem eventKey={1}>Add Todo</NavItem>
+                            <LinkContainer to={{ pathname: '/', query: {  } }} onClick={this.toggleAddRecipe}>
+                                <NavItem eventKey={1}>Add Recipe</NavItem>
                             </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 <div className="container">
-                    { /* Each Smaller Components */}
                     {this.props.children}
                 </div>
             </div>

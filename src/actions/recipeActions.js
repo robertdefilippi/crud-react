@@ -1,7 +1,9 @@
 // Connect to the api endpoint set up in the node server
 // TODO change endpoint from /api to /recipe
 
+// Define endpoint
 const apiUrl = "/api/";
+
 export const toggleAddRecipe = () => {
     return {
         type: 'TOGGLE_ADD_RECIPE'
@@ -17,7 +19,7 @@ export const deleteRecipe = (recipe) => {
 export const editRecipe = (recipe) => {
 };
 
-export const fetchRecipe = () => {
+export const fetchRecipes = () => {
     // Returns an async dispatcher function
     return (dispatch) => {
 
@@ -63,17 +65,17 @@ export const fetchRecipesSuccess = (recipe, message) => {
 
 export const fetchRecipesFailed = (error) => {
     return {
-        type: 'FETCH_RECIPIES_FAILED',
+        type: 'FETCH_RECIPES_FAILED',
         error
     }
 };
 
-export const fetchRecipeById = (recipieId) => {
+export const fetchRecipeById = (recipeId) => {
 
     return (dispatch) => {
         dispatch(fetchRecipeRequest());
 
-        return fetch(apiUrl + recipieId)
+        return fetch(apiUrl + recipeId)
             .then(response => {
                 console.log(response);
 
@@ -95,6 +97,7 @@ export const fetchRecipeById = (recipieId) => {
 };
 
 export const fetchRecipeRequest = () => {
+
     return {
         type: 'FETCH_RECIPE_REQUEST'
     }
@@ -102,6 +105,7 @@ export const fetchRecipeRequest = () => {
 
 //Sync action
 export const fetchRecipeSuccess = (recipe, message) => {
+
     return {
         type: 'FETCH_RECIPE_SUCCESS',
         recipe: recipe,
@@ -111,6 +115,7 @@ export const fetchRecipeSuccess = (recipe, message) => {
 };
 
 export const fetchRecipeFailed = (error) => {
+
     return {
         type: 'FETCH_RECIPE_FAILED',
         error

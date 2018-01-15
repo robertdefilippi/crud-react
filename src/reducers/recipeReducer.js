@@ -1,96 +1,115 @@
-// ./react-redux-client/src/reducers/todoReducer.js
+// Reducers update the state object in your store.
+// Actions describe that something happened, but not "how" things happened / changed
+// Reducers say "how"
+
+// Set the initial state to mutate
 const INITIAL_STATE = {
-    todos:[],
-    todo:null,
+    recipes: [],
+    recipe: null,
     isFetching: false,
     error: null,
-    successMsg:null,
+    successMsg: null,
     showDeleteModal: false,
-    todoToDelete: null,
+    recipeToDelete: null,
     showEditModal: false,
-    todoToEdit: null,
-}
-export  const todoReducer = (currentState = INITIAL_STATE, action) => {
+    recipeToEdit: null,
+};
+
+
+// For recipe and recipes, there are three actions: REQUEST, SUCCESS, and FAIL
+// Each will have different results
+export const recipeReducer = (currentState = INITIAL_STATE, action) => {
+
+    // Determine the type of action you're dealing with
     switch (action.type) {
-        case 'FETCH_TODOS_REQUEST':
+
+        case 'FETCH_RECIPES_REQUEST':
             return {
                 ...currentState,
-                todos:[],
-                todo:null,
+                recipes: [],
+                recipe: null,
                 isFetching: true,
                 error: null,
-                successMsg:null,
+                successMsg: null,
                 showDeleteModal: false,
-                todoToDelete: null,
+                recipeDelete: null,
                 showEditModal: false,
-                todoToEdit: null,
-            }
-        case 'FETCH_TODOS_SUCCESS':
+                recipeEdit: null,
+            };
+
+        case 'FETCH_RECIPES_SUCCESS':
             return {
                 ...currentState,
-                todos:action.todos,
-                todo:null,
+                recipes: action.recipes,
+                recipe: null,
                 isFetching: false,
                 error: null,
-                successMsg:action.message,
+                successMsg: action.message,
                 showDeleteModal: false,
-                todoToDelete: null,
+                recipeToDelete: null,
                 showEditModal: false,
-                todoToEdit: null,
-            }
-        case 'FETCH_TODOS_FAILED':
+                recipeToEdit: null,
+            };
+
+        case 'FETCH_RECIPES_FAILED':
             return {
                 ...currentState,
-                todos:[],
-                todo:null,
+                recipes: [],
+                recipe: null,
                 isFetching: false,
                 error: action.error,
-                successMsg:null,
+                successMsg: null,
                 showDeleteModal: false,
-                todoToDelete: null,
+                recipeToDelete: null,
                 showEditModal: false,
-                todoToEdit: null,
-            }
-        case 'FETCH_TODO_REQUEST':
+                recipeToEdit: null,
+            };
+
+        case 'FETCH_RECIPE_REQUEST':
             return {
                 ...currentState,
-                todos:currentState.todos,
-                todo:null,
+                recipes: currentState.recipes,
+                recipe: null,
                 isFetching: true,
                 error: null,
-                successMsg:null,
+                successMsg: null,
                 showDeleteModal: false,
-                todoToDelete: null,
+                recipeDelete: null,
                 showEditModal: false,
-                todoToEdit: null,
-            }
-        case 'FETCH_TODO_SUCCESS':
+                recipeEdit: null,
+            };
+
+        case 'FETCH_RECIPE_SUCCESS':
             return {
                 ...currentState,
-                todos:currentState.todos,
-                todo:action.todo,
+                recipes: currentState.recipes,
+                recipe: action.recipe,
                 isFetching: false,
                 error: null,
-                successMsg:action.message,
+                successMsg: action.message,
                 showDeleteModal: false,
-                todoToDelete: null,
+                recipeDelete: null,
                 showEditModal: false,
-                todoToEdit: null,
-            }
-        case 'FETCH_TODO_FAILED':
+                recipeEdit: null,
+            };
+
+        case 'FETCH_RECIPE_FAILED':
             return {
                 ...currentState,
-                todos:[],
-                todo:null,
+                recipes: [],
+                recipe: null,
                 isFetching: false,
                 error: action.error,
-                successMsg:null,
+                successMsg: null,
                 showDeleteModal: false,
-                todoToDelete: null,
+                recipeDelete: null,
                 showEditModal: false,
-                todoToEdit: null,
-            }
+                recipeEdit: null,
+            };
+
         default:
             return currentState;
     }
-}
+};
+
+export default recipeReducer;

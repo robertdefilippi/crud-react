@@ -1,15 +1,25 @@
-// ./react-redux-client/src/reducers/appReducer.js
+// Reducers update the state object in your store.
+// Actions describe that something happened, but not "how" things happened / changed
+// Reducers say "how"
+
 const INITIAL_STATE = {
-    showAddTodo: false
-}
+    showAddRecipe: false
+};
+
 const appReducer = (currentState = INITIAL_STATE, action) => {
+
+    // Determine current action
     switch (action.type) {
-        case 'TOGGLE_ADD_TODO':
+
+        case 'TOGGLE_ADD_RECIPE':
             return {
-                ...currentState,showAddTodo: !currentState.showAddTodo
-            }
-        default:
+                ...currentState,
+                showAddRecipe: !currentState.showAddRecipe
+            };
+
+            default:
             return currentState;
     }
-}
+};
+
 export default appReducer;

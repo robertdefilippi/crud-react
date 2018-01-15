@@ -1,16 +1,15 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from './containers/App';
-import Todos from './containers/Todos';
-import Todo from './containers/Todo';
+import {Route, IndexRoute} from 'react-router'; // Define to allow routing
 
-// For the App.js component.
-// React renders Todos at “/”
-// React renders one route “/:id” by the id parameter
-// TODO add correct objects for App and Todos and Todo
+// Import the routes you will be using
+import App from '../containers/app';
+import Recipes from '../containers/recipes';
+import Recipe from '../containers/recipe';
+
+// Render the containers (not the components)
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={Todos} />
-        <Route path="/:id" component={Todo} />
+        <IndexRoute component={Recipes}/>
+        <Route path="/:id" component={Recipe}/>
     </Route>
 )

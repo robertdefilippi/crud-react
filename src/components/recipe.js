@@ -1,23 +1,29 @@
-// ./react-redux-client/src/components/Todo.js
-import React from 'react';
-export default class Todo extends React.Component {
-    componentDidMount(){
-        this.props.mappedfetchTodoById(this.props.params.id);
+// Single Recipe component, not to be confused with Recipes
+
+import React, {Component} from 'react';
+
+export default class Recipe extends Component {
+
+    componentDidMount() {
+        this.props.mappedFetchRecipeById(this.props.params.id);
     }
-    render(){
-        const todoState = this.props.mappedTodoState;
-        return(
-            <div className="todoDetail">
-                <h2>Todo Detail</h2>
-                {!todoState.todo && todoState.isFetching &&
+
+    render() {
+
+        const recipeState = this.props.mappedRecipeState;
+
+        return (
+            <div className="recipeDetail">
+                <h2>Recipe Detail</h2>
+                {!recipeState.recipe && recipeState.isFetching &&
                 <div>
-                    <p>Loading todo....</p>
+                    <p>Loading recipe....</p>
                 </div>
                 }
-                {todoState.todo && !todoState.isFetching &&
+                {recipeState.recipe && !recipeState.isFetching &&
                 <div>
-                    <h3>{todoState.todo.todoText}</h3>
-                    <p>{todoState.todo.todoDesc}</p>
+                    <h3>{recipeState.recipe.recipeText}</h3>
+                    <p>{recipeState.recipe.recipeDesc}</p>
                 </div>
                 }
             </div>
