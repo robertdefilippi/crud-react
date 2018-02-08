@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as recipeActions from '../actions/recipeActions';
 import Recipes from '../components/recipes'; // Imports cousin recipes.js component
 
+// map state from store to props
 const mapStateToProps = (state, ownProps) => {
     return {
         mappedRecipeState: state.recipeState

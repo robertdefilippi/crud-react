@@ -2,6 +2,7 @@
 // Actions describe that something happened, but not "how" things happened / changed
 // Reducers say "how"
 
+// Set the initial state of the app
 const INITIAL_STATE = {
     showAddRecipe: false
 };
@@ -17,7 +18,7 @@ const appReducer = (currentState = INITIAL_STATE, action) => {
                 showAddRecipe: !currentState.showAddRecipe
             };
 
-            default:
+        default:
             return currentState;
     }
 };

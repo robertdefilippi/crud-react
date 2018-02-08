@@ -1,9 +1,9 @@
 // The main component of the CRUD app
 
 import React, {Component} from 'react';
+// eslint-disable-next-line
 import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import './App.css';
 
 export default class App extends Component {
     constructor(props){

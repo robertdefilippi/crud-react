@@ -1,14 +1,21 @@
 import React, {Component} from 'react';
+// eslint-disable-next-line
 import {Alert, Glyphicon, Button, Modal} from 'react-bootstrap';
 import {Link} from 'react-router';
 
 export default class Recipes extends Component {
+
     constructor(props) {
         super(props);
+
+        this.state = {
+            recipes: []
+        }
     }
 
-    componentWillMount() {
-        this.props.fetchRecipes();
+    componentDidMount() {
+        this.props.fetchRecipes()
+            .then(_ => this.setState({recipes: _}));;
     }
 
     // TODO what is that?
@@ -29,17 +36,20 @@ export default class Recipes extends Component {
     }
 
     render() {
+
         const recipeState = this.props.mappedRecipeState;
-        const recipes = recipeState.recipes;
+        const recipes = recipeState.recipes || []; // If undefined, return an empty array
+        console.log("The recipe state is: ", recipeState);
+        console.log("The recipe is WOOF: ", recipes);
+
         return (
+
             <div className="col-md-12">
                 <h3 className="centerAlign">Recipes</h3>
                 {!recipes && recipeState.isFetching &&
-                <p>Loading recipes .... </p>
-                }
+                <p>Loading recipes .... </p>}
                 {recipes.length <= 0 && !recipeState.isFetching &&
-                <p>No Recipes Available. Add A Recipe Here.</p>
-                }
+                <p>No Recipes Available. Add A Recipe Here.</p>}
                 {recipes && recipes.length > 0 && !recipeState.isFetching &&
                 <table className="table booksTable">
                     <thead>

@@ -1,14 +1,17 @@
-// Connect to the api endpoint set up in the node server
-// TODO change endpoint from /api to /recipe
+// Actions are object payloads and .Action are methods to action objects
+// These change the state in the reducer files
 
 // Define endpoint
 const apiUrl = "/api/";
 
-export const toggleAddRecipe = () => {
+// TODO Change toggleAddBook when compiling correctly; may not be possible
+export const toggleAddBook = () => {
     return {
         type: 'TOGGLE_ADD_RECIPE'
     }
 };
+
+// Functions after the fetch has been resolved
 
 export const addNewRecipe = (recipe) => {
 };
@@ -20,16 +23,15 @@ export const editRecipe = (recipe) => {
 };
 
 export const fetchRecipes = () => {
-    // Returns an async dispatcher function
+
+    // .dispatch sends action to the store
     return (dispatch) => {
-
         dispatch(fetchRecipesRequest());
-
 
         return fetch(apiUrl)
             .then(response => {
 
-                // If success
+                // If successfully connected to API ..
                 if (response.ok) {
                     response.json()
                         .then(data => {
@@ -47,13 +49,13 @@ export const fetchRecipes = () => {
     }
 };
 
+// Fetch has three parts: request, success, fail
 export const fetchRecipesRequest = () => {
     return {
         type: 'FETCH_RECIPES_REQUEST'
     }
 };
 
-//Sync action
 export const fetchRecipesSuccess = (recipe, message) => {
     return {
         type: 'FETCH_RECIPES_SUCCESS',
@@ -79,7 +81,7 @@ export const fetchRecipeById = (recipeId) => {
             .then(response => {
                 console.log(response);
 
-                // If successful return the first recipe
+                // If successful return the recipe that matches it
                 if (response.ok) {
                     response.json().then(data => {
                         dispatch(fetchRecipeSuccess(data.recipe[0], data.message));
@@ -96,6 +98,7 @@ export const fetchRecipeById = (recipeId) => {
     }
 };
 
+// Three fetch action: request, success, and fail
 export const fetchRecipeRequest = () => {
 
     return {

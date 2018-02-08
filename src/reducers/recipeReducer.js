@@ -2,7 +2,7 @@
 // Actions describe that something happened, but not "how" things happened / changed
 // Reducers say "how"
 
-// Set the initial state to mutate
+// Set the initial state of the recipe object
 const INITIAL_STATE = {
     recipes: [],
     recipe: null,
@@ -15,12 +15,12 @@ const INITIAL_STATE = {
     recipeToEdit: null,
 };
 
-
 // For recipe and recipes, there are three actions: REQUEST, SUCCESS, and FAIL
+// These are from recipeActions.js
 // Each will have different results
 export const recipeReducer = (currentState = INITIAL_STATE, action) => {
 
-    // Determine the type of action you're dealing with
+    // Determine the type of action
     switch (action.type) {
 
         case 'FETCH_RECIPES_REQUEST':

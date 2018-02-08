@@ -1,7 +1,6 @@
 // Main file for the frontend CRUD app
 
 import React, {Component} from 'react';
-import './App.css';
 import {Provider} from 'react-redux'; // Make store available to container components
 import {Router, browserHistory} from 'react-router'; // Will wrap all the routes we define in our routes file
 import PropTypes from 'prop-types'; // Runtime type checking for React props and similar objects.
@@ -14,6 +13,9 @@ const history = syncHistoryWithStore(browserHistory, store); // Sync browser his
 
 class App extends Component {
     render() {
+
+        console.log("The store is: ", store);
+
         return (
             <Provider store={store}>
                 <div>

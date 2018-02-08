@@ -1,27 +1,18 @@
-// Holds the whole state tree ofapplication.
+// Holds the whole state tree of the application,
+// for app and the individual recipes
 
-import {createStore, compose, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk'; // Middleware to return functions not actions; async for functions
+import logger from 'redux-logger'
+
 import rootReducer from '../reducers';
 
+// Define configureStore for export into app.js
 export default function configureStore(initialState) {
-    const middlewares = [
-        thunk,
-    ];
-
-    const store = createStore(rootReducer, initialState, compose(
-        applyMiddleware(...middlewares),
-        window.devToolsExtension ? window.devToolsExtension() : f => f // add support for Redux dev tools
-        )
+    return createStore(
+        rootReducer,
+        initialState,
+        applyMiddleware(thunk, logger)
     );
 
-    if (module.hot) {
-
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept('../reducers', () => {
-            const nextReducer = require('../reducers').default;
-            store.replaceReducer(nextReducer);
-        });
-    }
-    return store;
 }
